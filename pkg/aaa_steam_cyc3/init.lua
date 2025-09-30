@@ -1,0 +1,118 @@
+local extension = Package("aaa_steam_cyc3")
+extension.extensionName = "aaa_steam"
+
+Fk:loadTranslationTable{
+  ["aaa_steam_cyc3"] = "嘭嘭嘭", -- 空洞包
+  ["hollow"] = "空",
+}
+
+
+-- hollowknight = General:new(extension, "steam__hollowknight", "hollow", 4)
+Fk:loadTranslationTable{
+  ["steam__hollowknight"] = "空洞骑士",
+  ["#steam__hollowknight"] = "",
+  ["designer:steam__hollowknight"] = "cyc",
+  ["illustrator:steam__hollowknight"] = "",
+}
+
+General:new(extension, "steam__hornet", "hollow", 3, 3, General.Female):addSkills{"steam__renzhiyi", "steam__sizhige"}
+Fk:loadTranslationTable{
+  ["steam__hornet"] = "大黄蜂",
+  ["#steam__hornet"] = "",
+  ["designer:steam__hornet"] = "cyc",
+  ["illustrator:steam__hornet"] = "",
+  ["~steam__hornet"] = "哈——",
+}
+
+General:new(extension, "steam__quirrel", "hollow", 4):addSkills { "steam__mingzhao", "steam__juejin" }
+Fk:loadTranslationTable{
+  ["steam__quirrel"] = "奎若",
+  ["#steam__quirrel"] = "",
+  ["designer:steam__quirrel"] = "cyc",
+  ["illustrator:steam__quirrel"] = "",
+  ["~steam__quirrel"] = "多斯达噶农",
+}
+
+General:new(extension, "steam__soulmaster", "hollow", 4):addSkills { "steam__niuqulinghun", "steam__yongshengzhilu" }
+Fk:loadTranslationTable{
+  ["steam__soulmaster"] = "灵魂大师",
+  ["#steam__soulmaster"] = "",
+  ["designer:steam__soulmaster"] = "cyc",
+  ["illustrator:steam__soulmaster"] = "",
+  ["~steam__soulmaster"] = "唔啊！！！",
+}
+
+local collector = General:new(extension, "steam__collector", "hollow", 3)
+collector:addSkills{"steam__aizhita", "steam__jierunang"}
+collector.shield = 1
+Fk:loadTranslationTable{
+  ["steam__collector"] = "收藏家",
+  ["#steam__collector"] = "",
+  ["designer:steam__collector"] = "cyc",
+  ["illustrator:steam__collector"] = "",
+  ["~steam__collector"] = "（鬼叫）",
+}
+
+General:new(extension, "steam__dungdefender", "hollow", 4):addSkills{"steam__yingyongzhixi", "steam__rongyaochongzhuang"}
+Fk:loadTranslationTable{
+  ["steam__dungdefender"] = "奥格瑞姆",
+  ["#steam__dungdefender"] = "",
+  ["designer:steam__dungdefender"] = "cyc",
+  ["illustrator:steam__dungdefender"] = "",
+  ["~steam__dungdefender"] = "",
+}
+
+General:new(extension, "steam__crystal_guardian", "hollow", 4):addSkills{"steam__jinghuaqifu", "steam__zhuoreshexian", "steam__shendujineng"}
+Fk:loadTranslationTable{
+  ["steam__crystal_guardian"] = "水晶守卫",
+  ["#steam__crystal_guardian"] = "",
+  ["designer:steam__crystal_guardian"] = "cyc",
+  ["illustrator:steam__crystal_guardian"] = "",
+  ["~steam__crystal_guardian"] = "",
+}
+
+General:new(extension, "steam__paleking", "hollow", 5):addSkills{"steam__shengchaosong", "steam__yanqingguo", "steam__mengliushang"}
+Fk:loadTranslationTable{
+  ["steam__paleking"] = "苍白之王",
+  ["#steam__paleking"] = "",
+  ["designer:steam__paleking"] = "cyc",
+  ["illustrator:steam__paleking"] = "",
+  ["~steam__paleking"] = "",
+}
+
+General:new(extension, "steam__goddiaochan", "god", 3, 3, General.Female):addSkills { "steam__meihun", "steam__huoxin" }
+Fk:loadTranslationTable{
+  ["steam__goddiaochan"] = "神貂蝉",
+  ["#steam__goddiaochan"] = "欲界非天",
+  ["illustrator:steam__goddiaochan"] = "KayaK",
+  ["designer:steam__goddiaochan"] = "cyc",
+
+  ["~steam__goddiaochan"] = "待我归来，定让这天下再为我癫狂！",
+}
+
+local wenqin = General:new(extension, "steam__wenqin", "wei", 4, 4, General.Male)--
+wenqin:addSkills { "steam__chaoxiong", "steam__xieju" }
+wenqin:addRelatedSkills{ "steam__weijing" }
+Fk:loadTranslationTable{
+  ["steam__wenqin"] = "文钦",
+  ["#steam__wenqin"] = "仇烈涸清",
+  ["illustrator:steam__wenqin"] = "铁杵文化",
+  ["designer:steam__wenqin"] = "cyc",
+
+  ["~steam__wenqin"] = "伺君兵败之日，必报此仇于九泉！",
+}
+
+General:new(extension, "steamcyc__huaman", "shu", 4, 4, General.Female):addSkills { "steam__zhuisuo", "steam__changbiao" }
+Fk:loadTranslationTable{
+  ["steamcyc"] = "蒸",
+  ["steamcyc__huaman"] = "花鬘",
+  ["#steamcyc__huaman"] = "夷地恋",
+  ["illustrator:steamcyc__huaman"] = "",
+  ["designer:steamcyc__huaman"] = "cyc",
+
+  ["~steamcyc__huaman"] = "沙场叶落，山花凋零。",
+}
+
+
+
+return extension
