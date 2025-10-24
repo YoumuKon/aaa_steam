@@ -113,6 +113,16 @@ Fk:loadTranslationTable{
   ["~steamcyc__huaman"] = "沙场叶落，山花凋零。",
 }
 
+local wenqin = General:new(extension, "steamcyc__zerong", "qun", 4, 4, General.Male)--
+wenqin:addSkills { "steam__chizong", "steam__yulun" }
+wenqin:addRelatedSkills{ "steam__bufo" }
+Fk:loadTranslationTable{
+  ["steamcyc__zerong"] = "魔笮融",
+  ["#steamcyc__zerong"] = "血魔",
+  ["illustrator:steamcyc__zerong"] = "",
+  ["designer:steamcyc__zerong"] = "cyc",
 
+  ["~steamcyc__zerong"] = "众生不悟，迷之者多。",
+}
 
 return extension
