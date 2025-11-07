@@ -6,6 +6,10 @@ Fk:loadTranslationTable{
     [":steam__chizong"] = "每回合限一次，你使用牌指定其他角色，或其他角色使用牌指定你为目标时，若没有濒死角色，你可以选择一名目标，令此牌对其按<a href=':steam_chizong__daggar_in_smile'>【笑里藏刀】</a>结算。",
     [":steam_chizong__daggar_in_smile"] = "<b>笑里藏刀</b>：出牌阶段，对一名其他角色使用。目标角色摸X张牌（X为其已损失体力值且至多为5），然后你对其造成1点伤害。",
     ["#steam__chizong"] = "赤宗：你可以令%arg对其中一个目标改为按【笑里藏刀】结算",
+    ["#steam__chizong-log"] = "由于〖<font color='#0598BC'>赤宗</font>〗的效果，%from 对 %to 使用的 %arg 改为按 <font color='#0598BC'>笑里藏刀</font> 结算",
+
+    ["$steam__chizong1"] = "杀生为度生，行恶即抑恶。",
+    ["$steam__chizong2"] = "世尊割肉饲鹰，而吾舍身度人。",
 }
 
 chizong:addEffect(fk.TargetSpecifying, {
@@ -75,6 +79,12 @@ chizong:addEffect(fk.PreCardEffect, {
         end
     end,
     on_refresh = function (self, event, target, player, data)
+        player.room:sendLog{
+            type = "#steam__chizong-log",
+            from = data.from.id,
+            to = {data.to.id},
+            arg = data.card:toLogString(),
+        }
         data:changeCardSkill("steam_chizong__daggar_in_smile_skill")
     end,
 })

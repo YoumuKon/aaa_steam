@@ -123,6 +123,7 @@ Fk:loadTranslationTable{
   ["designer:steamcyc__zerong"] = "cyc",
 
   ["~steamcyc__zerong"] = "众生不悟，迷之者多。",
+  ["!steamcyc__zerong"] = "无有三途苦难之名，但有自然快乐之声。",
 }
 
 return extension

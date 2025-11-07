@@ -5,6 +5,8 @@ local bufo = fk.CreateSkill{
 Fk:loadTranslationTable{
     ["steam__bufo"] = "不佛",
     [":steam__bufo"] = "锁定技，回合开始时，你对距离1的角色各造成1点火焰伤害。当你受到大于1点的伤害时，此伤害-1。",
+
+    ["$steam__bufo1"] = "我不入地狱，谁入地狱？",
 }
 
 bufo:addEffect(fk.TurnStart, {

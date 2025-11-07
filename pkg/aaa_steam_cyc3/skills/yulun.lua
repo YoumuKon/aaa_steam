@@ -8,6 +8,9 @@ Fk:loadTranslationTable{
     ["steam__yulun"] = "狱轮",
     [":steam__yulun"] = "觉醒技，当你脱离受伤或濒死状态后，你<a href='#RuMoDesc'><font color='red'>入魔</font></a>并获得〖不佛〗。",
     ["#RuMoDesc"] = "入魔是每局游戏限一次的操作，入魔后，每轮结束时，若本轮你未造成过伤害，你失去1点体力。",
+
+    ["$steam__yulun1"] = "拔诸勤苦生死根本，速成无上正等正觉。",
+    ["$steam__yulun2"] = "轮回诸趣众生类，速生我刹受安乐。",
 }
 
 yulun:addEffect(fk.HpChanged, {
