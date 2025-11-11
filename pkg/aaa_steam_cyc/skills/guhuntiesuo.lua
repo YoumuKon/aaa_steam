@@ -47,9 +47,9 @@ skel:addEffect("prohibit", {
   prohibit_use = function(self, player, card)
     local mark = player:getMark("@steam__guhuntiesuo-turn")
     if mark ~= 0 and card then
-      return card:getColorString() == mark
-      and not (card.color == Card.NoColor and #card.skillNames == 0 and card:isVirtual())
-      -- 禁止使用无色牌很危险
+      return not card:matchVSPattern(".|.|^" .. mark)
+      -- 老方法
+      --return card:getColorString() == mark and not (card.color == Card.NoColor and #card.skillNames == 0 and card:isVirtual())
     end
   end,
 })
