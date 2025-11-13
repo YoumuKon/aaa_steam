@@ -1,6 +1,11 @@
 local lvli = fk.CreateSkill{
     name = "steamMinshe__lvli",
     tags = {Skill.Compulsory},
+    dynamic_desc = function (self, player, lang)
+        if player:getMark("@[desc]steamMinshe__beishui") > 0 then
+            return "锁定技，你使用非伤害牌结算后，横置并翻至背面；你的体力值变化后，复原武将牌并破釜1并摸等量牌；你的武将牌状态变化后，本回合你使用的下一张牌无距离和次数限制。"
+        end
+    end,
 }
 
 Fk:loadTranslationTable{
