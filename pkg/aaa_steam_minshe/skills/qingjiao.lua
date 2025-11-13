@@ -14,7 +14,7 @@ Fk:loadTranslationTable{
 qingjiao:addEffect(fk.EventPhaseStart, {
   anim_type = "drawcard",
   can_trigger = function(self, event, target, player, data)
-    return target == player and player:getMark("@[desc]steamMinshe__beishui-phase") > 0 and player.phase == Player.Play and
+    return target == player and player:getMark("@[desc]steamMinshe__beishui") > 0 and player.phase == Player.Play and
       not player:isKongcheng()
   end,
   on_use = function(self, event, target, player, data)

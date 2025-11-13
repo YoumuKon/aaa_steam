@@ -37,7 +37,7 @@ lvli:addEffect(fk.CardUseFinished, {
         if #choices > 0  then
             local room = player.room
             local choice = choices[1]
-            if #choices > 1 and player:getMark("@[desc]steamMinshe__beishui-phase") == 0 then
+            if #choices > 1 and player:getMark("@[desc]steamMinshe__beishui") == 0 then
                 choice = room:askToChoice(player, {
                     choices = choices,
                     all_choices = { "#steamMinshe__lvli1",  "#steamMinshe__lvli2"},
@@ -51,10 +51,10 @@ lvli:addEffect(fk.CardUseFinished, {
     end,
     on_use = function (self, event, target, player, data)
         local room = player.room
-        if event:getCostData(self) == "#steamMinshe__lvli1" or player:getMark("@[desc]steamMinshe__beishui-phase") > 0 then
+        if event:getCostData(self) == "#steamMinshe__lvli1" or player:getMark("@[desc]steamMinshe__beishui") > 0 then
             player:setChainState(true)
         end
-        if event:getCostData(self) == "#steamMinshe__lvli2" or player:getMark("@[desc]steamMinshe__beishui-phase") > 0 then
+        if event:getCostData(self) == "#steamMinshe__lvli2" or player:getMark("@[desc]steamMinshe__beishui") > 0 then
             if player.faceup then player:turnOver() end
         end
     end,
@@ -69,7 +69,7 @@ lvli:addEffect(fk.HpChanged, {
     on_cost = function (self, event, target, player, data)
         local choices = {}
         local all_choices = { "#steamMinshe__lvli3", "#steamMinshe__lvli4", "#steamMinshe__lvli5", "#steamMinshe__lvli6"}
-        if player:getMark("@[desc]steamMinshe__beishui-phase") > 0 then
+        if player:getMark("@[desc]steamMinshe__beishui") > 0 then
             all_choices = { "#steamMinshe__lvli4", "#steamMinshe__lvli5", "#steamMinshe__lvli6"}
         else
             if player.chained or not player.faceup then
@@ -98,20 +98,20 @@ lvli:addEffect(fk.HpChanged, {
             end
             event:setCostData(self, choice)
             return true
-        elseif (player.chained or not player.faceup) and player:getMark("@[desc]steamMinshe__beishui-phase") > 0 then
+        elseif (player.chained or not player.faceup) and player:getMark("@[desc]steamMinshe__beishui") > 0 then
             event:setCostData(self, "")
             return true
         end
     end,
     on_use = function (self, event, target, player, data)
         local room = player.room
-        if player:getMark("@[desc]steamMinshe__beishui-phase") > 0 or event:getCostData(self) == "#steamMinshe__lvli3" then
+        if player:getMark("@[desc]steamMinshe__beishui") > 0 or event:getCostData(self) == "#steamMinshe__lvli3" then
             player:setChainState(false)
             if not player.faceup then
                 player:turnOver()
             end
         end
-        if player:getMark("@[desc]steamMinshe__beishui-phase") > 0 or event:getCostData(self) ~= "#steamMinshe__lvli3" then
+        if player:getMark("@[desc]steamMinshe__beishui") > 0 or event:getCostData(self) ~= "#steamMinshe__lvli3" then
             local cards = {}
             if event:getCostData(self) == "#steamMinshe__lvli4" then
                 cards = player:getCardIds("h")
