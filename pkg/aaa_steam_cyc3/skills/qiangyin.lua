@@ -165,7 +165,6 @@ skel:addEffect(fk.AfterCardsMove, {
     for _, id in ipairs(event:getCostData(self).cards) do
       room:removeTableMark(player, "steam__qiangyin_hujia", id)
     end
-    room:setPlayerMark(player, "steam__qiangyin_hujia", #player:getTableMark("steam__qiangyin_hujia"))
     local num = math.random(1, 3)
     local cards = {}
     for _, ids in ipairs(room.draw_pile) do
