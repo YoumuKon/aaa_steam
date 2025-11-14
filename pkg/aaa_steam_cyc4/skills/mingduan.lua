@@ -4,9 +4,9 @@ local mingduan = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["steam__mingduan"] = "明断",
-  [":steam__mingduan"] = "你与其他角色于出牌阶段内使用的目标包含对方的首张牌结算后，你可以令任意名目标各进行一次【浮雷】判定并蓄谋判定牌。",
+  [":steam__mingduan"] = "你与其他角色于出牌阶段内使用的目标包含对方的首张牌结算后，你可以令一名目标进行一次【浮雷】判定并蓄谋判定牌。",
 
-  ["#steam__mingduan-choose"] = "明断：你可以令任意名目标各进行一次【浮雷】判定并蓄谋判定牌",
+  ["#steam__mingduan-choose"] = "明断：你可以令一名目标进行一次【浮雷】判定并蓄谋判定牌",
 
   ["$steam__mingduan1"] = "电光石火，有触即发！",
   ["$steam__mingduan2"] = "有术无道，愚不可及！",
@@ -45,7 +45,7 @@ mingduan:addEffect(fk.CardUseFinished, {
     local room = player.room
     local tos = room:askToChoosePlayers(player, {
       min_num = 1,
-      max_num = 10,
+      max_num = 1,
       targets = data.tos,
       skill_name = mingduan.name,
       prompt = "#steam__mingduan-choose",

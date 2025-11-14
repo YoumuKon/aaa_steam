@@ -80,6 +80,15 @@ Fk:loadTranslationTable{
   ["~steam__paleking"] = "",
 }
 
+General:new(extension, "steam__fourth_chorus", "hollow", 4):addSkills{"steam__qiangyin", "steam__shengyong"}
+Fk:loadTranslationTable{
+  ["steam__fourth_chorus"] = "圣咏奏唱团",
+  ["#steam__fourth_chorus"] = "",
+  ["designer:steam__fourth_chorus"] = "cyc",
+  ["illustrator:steam__fourth_chorus"] = "",
+  ["~steam__fourth_chorus"] = "",
+}
+
 General:new(extension, "steam__goddiaochan", "god", 3, 3, General.Female):addSkills { "steam__meihun", "steam__huoxin" }
 Fk:loadTranslationTable{
   ["steam__goddiaochan"] = "神貂蝉",

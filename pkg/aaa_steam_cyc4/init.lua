@@ -74,7 +74,9 @@ Fk:loadTranslationTable{
   ["~steam__goldenglow"] = "就差一点点……",
 }
 
-General:new(extension, "steam__leizi_the_thunderbringer", "han", 3, 3, General.Female):addSkills{ "steam__mingduan", "steam__shewei" }
+local thunderbringer = General:new(extension, "steam__leizi_the_thunderbringer", "han", 3, 3, General.Female)
+thunderbringer.shield = 1
+thunderbringer:addSkills{ "steam__mingduan", "steam__shewei" }
 Fk:loadTranslationTable{
   ["steam__leizi_the_thunderbringer"] = "司霆惊蛰",
   ["#steam__leizi_the_thunderbringer"] = "诛邪雷法",
