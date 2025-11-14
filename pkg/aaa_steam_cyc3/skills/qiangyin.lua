@@ -11,10 +11,10 @@ Fk:loadTranslationTable{
   "能随机到以下标记，标记被激活至少一次后，你获得对应项的效果：<br>"..
   "胡笳：你失去“胡笳”后，获得随机一至三张花色各不相同的牌。<br>"..
   "檀板：你使用“檀板”牌后，可以展示一张非“檀板”的即时牌视为使用之。<br>"..
-  "激鼓：你造成或受到伤害后，若你手牌中的“激鼓”牌数等于装备区牌数，你摸装备栏空位张牌；发动次数达到本局游戏已进入过回合的角色数后本轮失效。<br>"..
+  "激鼓：每轮限一次，你造成或受到伤害后，若你手牌中的“激鼓”牌数等于装备区牌数，你摸装备栏空位张牌。<br>"..
   "弦：你失去“弦”牌后，防止本回合你下次受到的伤害。<br>"..
   "笛：准备或结束阶段，你卜算等同于你手牌中“笛”数量的牌（至少一张，至多八张）。<br>"..
-  "琴：准备阶段，你获得弃牌堆中所有的“琴”牌。"..
+  "琴：准备阶段，你获得弃牌堆中所有的“琴”牌。<br>"..
   "额外地，这些标记牌即便在被激活后，也计入你的手牌上限。",
 
   ["@steam__qiangyin-inhand"] = "",
@@ -255,19 +255,10 @@ local spec = {
   can_trigger = function(self, event, target, player, data)
     return target == player and player:hasSkill(skel.name) and table.contains(player:getTableMark("@steam__qiangyin"), "激鼓") and
       #table.filter(player:getCardIds("h"), function (id) return Fk:getCardById(id):getMark("@steam__qiangyin-inhand") == "激鼓" end) == #player:getCardIds("e")
-      and #player:getAvailableEquipSlots() > #player:getCardIds("e") and player:getMark("steam__qiangyin_jigu_invalid-round") == 0
+      and #player:getAvailableEquipSlots() > #player:getCardIds("e") and player:usedEffectTimes("#steam__qiangyin_8_trig", Player.HistoryRound) +
+      player:usedEffectTimes("#steam__qiangyin_9_trig", Player.HistoryRound) == 0
   end,
   on_use = function(self, event, target, player, data)
-    local room = player.room
-    if player:getMark("steam__qiangyin_jigu") < #room.players then
-      local players = {}
-      room.logic:getEventsOfScope(GameEvent.Turn, 1, function (e) table.insertIfNeed(players, e.data.who) end, Player.HistoryGame)
-      room:setPlayerMark(player, "steam__qiangyin_jigu", #players)
-    end
-    if player:usedEffectTimes("#steam__qiangyin_8_trig", Player.HistoryRound) +
-      player:usedEffectTimes("#steam__qiangyin_9_trig", Player.HistoryRound) >= player:getMark("steam__qiangyin_jigu") then
-      room:setPlayerMark(player, "steam__qiangyin_jigu_invalid-round", 1)
-    end
     local n = #player:getAvailableEquipSlots() - #player:getCardIds("e")
     player:drawCards(n, skel.name)
   end,
