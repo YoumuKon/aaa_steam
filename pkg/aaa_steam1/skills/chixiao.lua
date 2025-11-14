@@ -9,7 +9,7 @@ Fk:loadTranslationTable{
   ["#steam__chixiao-card"] = "鸱鸮：请选择半数手牌，将它们翻面",
 }
 
-local DIY = require "packages/diy_utility/diy_utility"
+local DIY = require "packages.diy_utility.diy_utility"
 
 skel:addEffect(fk.CardUseFinished, {
   anim_type = "control",

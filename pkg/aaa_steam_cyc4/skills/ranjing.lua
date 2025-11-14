@@ -14,8 +14,8 @@ Fk:loadTranslationTable{
   ["$steam__ranjing2"] = "我对你们还算是有感情的，大多数时候。",
 }
 
-local U = require "packages/utility/utility"
-local DIY = require "packages/diy_utility/diy_utility"
+local U = require "packages.utility.utility"
+local DIY = require "packages.diy_utility.diy_utility"
 
 ranjing:addEffect(U.GeneralAppeared, {
   anim_type = "control",

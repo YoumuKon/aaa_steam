@@ -13,7 +13,7 @@ Fk:loadTranslationTable{
   ["$steam__mingxi2"] = "任务简报都是废纸，我清楚你要干什么。",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 mingxi:addEffect(U.GeneralAppeared, {
   anim_type = "special",

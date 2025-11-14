@@ -11,7 +11,7 @@ Fk:loadTranslationTable{
   ["$steam__mochen2"] = "他们甚至不知自己可耻。",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 skel:addEffect(fk.CardUsing, {
   anim_type = "offensive",

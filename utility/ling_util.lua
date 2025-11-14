@@ -1,7 +1,7 @@
 
-local LUtil = require 'packages/aaa_steam/utility/_base'
+local LUtil = require "packages.aaa_steam.utility._base"
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 --斗地主专属技能
 local bahu = fk.CreateTriggerSkill{

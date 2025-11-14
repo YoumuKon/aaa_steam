@@ -9,7 +9,7 @@ Fk:loadTranslationTable{
     ["$steam__guanche1"] = "我看见你了。",
     ["$steam__guanche2"] = "真显眼。",
 }
-local DIY = require "packages/diy_utility/diy_utility"
+local DIY = require "packages.diy_utility.diy_utility"
 local spec = {
     on_cost = function (self, event, target, player, data)
         local room = player.room

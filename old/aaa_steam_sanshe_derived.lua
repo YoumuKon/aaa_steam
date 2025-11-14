@@ -5,7 +5,7 @@ Fk:loadTranslationTable{
   ["aaa_steam_sanshe_derived"] = "散设",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 local enemyAtTheGatesSkill = fk.CreateActiveSkill{--修改自汗青的兵临城下
   name = "steam_ss__enemy_at_the_gates_skill",

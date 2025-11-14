@@ -16,8 +16,8 @@ Fk:loadTranslationTable{
   ["$steam__fear_box2"] = "呜呼嘿嘿！",
 }
 
-local U = require "packages/utility/utility"
-local DIY = require "packages/diy_utility/diy_utility"
+local U = require "packages.utility.utility"
+local DIY = require "packages.diy_utility.diy_utility"
 
 local on_use = function (self, event, target, player, data)
     player:drawCards(2, skel.name)

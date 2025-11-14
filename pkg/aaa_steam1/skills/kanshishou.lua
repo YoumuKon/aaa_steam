@@ -11,7 +11,7 @@ Fk:loadTranslationTable{
   ["#steam__kanshishou-ask"] = "看试手：你可以视为使用其中一张牌",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 skel:addEffect(fk.EventPhaseStart, {
   anim_type = "special",

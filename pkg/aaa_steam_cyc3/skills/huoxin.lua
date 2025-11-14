@@ -18,7 +18,7 @@ Fk:loadTranslationTable{
   ["$steam__huoxin2"] = "看你们为我疯魔厮杀，才是这世间最美的风景。",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 huoxin:addEffect("active", {
   anim_type = "control",

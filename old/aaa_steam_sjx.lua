@@ -4,7 +4,7 @@ extension.extensionName="aaa_steam"
 Fk:loadTranslationTable{
   ["steam_sjx"] = "设选",
 }
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 --- 按组展示牌，并询问选择若干个牌组（用于清正等）
 ---@param room Room
 ---@param player ServerPlayer @ 询问角色

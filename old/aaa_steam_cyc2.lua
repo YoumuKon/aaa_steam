@@ -1,8 +1,8 @@
 local extension = Package("aaa_steam_cyc2")
 extension.extensionName = "aaa_steam"
 
-local U = require "packages/utility/utility"
-local DIY = require "packages/diy_utility/diy_utility"
+local U = require "packages.utility.utility"
+local DIY = require "packages.diy_utility.diy_utility"
 
 Fk:loadTranslationTable{
   ["aaa_steam_cyc2"] = "嘭！！",

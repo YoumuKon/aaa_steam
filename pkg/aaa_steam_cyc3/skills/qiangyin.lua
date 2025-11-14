@@ -26,7 +26,7 @@ Fk:loadTranslationTable{
   ["$steam__qiangyin2"] = " ",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 skel:addLoseEffect(function (self, player, is_death)
   local room = player.room

@@ -9,7 +9,7 @@ Fk:loadTranslationTable{
   ["$godhanxin__baijiangfenghou"] = "上见君王不低头，三军将士常叩首，第十一枪，拜将封侯！",
 }
 
-local DIY = require "packages/diy_utility/diy_utility"
+local DIY = require "packages.diy_utility.diy_utility"
 
 skel:addEffect(fk.EventAcquireSkill, {
   anim_type = "switch",

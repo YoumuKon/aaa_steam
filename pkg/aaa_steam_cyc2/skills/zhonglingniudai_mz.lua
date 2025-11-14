@@ -8,7 +8,7 @@ Fk:loadTranslationTable{
   "<br>☆若你“鸣止”成功，你可以复原一名角色，其移动场上一张牌。",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 skel:addEffect(fk.EventPhaseStart, {
   can_trigger = function(self, event, target, player, data)

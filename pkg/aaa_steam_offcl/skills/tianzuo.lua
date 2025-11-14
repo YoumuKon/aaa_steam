@@ -17,7 +17,7 @@ Fk:loadTranslationTable{
   ["$steam__tianzuo2"] = "主公若不时定，待四方生心，则无及矣。",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 skel:addEffect(fk.GameStart, {
   anim_type = "control",

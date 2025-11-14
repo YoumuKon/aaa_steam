@@ -9,7 +9,7 @@ Fk:loadTranslationTable{
     ["$steam__shizhong1"] = "让他们有来无回。",
     ["$steam__shizhong2"] = "他们跑不了。",
 }
-local DIY = require "packages/diy_utility/diy_utility"
+local DIY = require "packages.diy_utility.diy_utility"
 local function tableSize(t)
     local tempCount = 0
     for _, _ in pairs(t) do

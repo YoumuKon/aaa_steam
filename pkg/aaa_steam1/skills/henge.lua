@@ -8,7 +8,7 @@ Fk:loadTranslationTable{
   [":steam__henge"] = "锁定技，你使用暗置牌造成伤害后，弃置半数取上张明置牌；你使用明置牌造成伤害后，摸暗置牌的半数取下张牌。",
 }
 
-local DIY = require "packages/diy_utility/diy_utility"
+local DIY = require "packages.diy_utility.diy_utility"
 
 skel:addEffect(fk.Damage, {
   mute = true,

@@ -27,7 +27,7 @@ for index = 1, 30 do
     [":steam__zhiyi"..index] = "锁定技，你使用或打出过基本牌的回合结束时，你选择一项：1.视为使用其中一张即时牌；2.摸一张牌。",
   }
 
-  local U = require "packages/utility/utility"
+  local U = require "packages.utility.utility"
 
   zhiyi:addEffect(fk.TurnEnd, {
     anim_type = "offensive",

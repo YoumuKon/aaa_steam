@@ -15,7 +15,7 @@ Fk:loadTranslationTable{
   ["$steam__butianlie2"] = "",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 skel:addEffect("active", {
   card_num = 0,

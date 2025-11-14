@@ -12,7 +12,7 @@ Fk:loadTranslationTable{
   ["$steam__mingduan2"] = "有术无道，愚不可及！",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 mingduan:addEffect(fk.CardUseFinished, {
   anim_type = "offensive",

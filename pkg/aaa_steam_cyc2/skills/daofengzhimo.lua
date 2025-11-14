@@ -13,7 +13,7 @@ Fk:loadTranslationTable{
   ["$steam__daofengzhimo2"] = "他们活不长了。",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 skel:addEffect(U.GeneralAppeared, {
   anim_type = "drawcard",

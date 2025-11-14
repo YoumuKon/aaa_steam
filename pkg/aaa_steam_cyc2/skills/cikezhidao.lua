@@ -13,7 +13,7 @@ Fk:loadTranslationTable{
   ["$steam__cikezhidao2"] = "无处可藏！",
 }
 
-local DIY = require "packages/diy_utility/diy_utility"
+local DIY = require "packages.diy_utility.diy_utility"
 
 skel:addEffect("active", {
   anim_type = "control",

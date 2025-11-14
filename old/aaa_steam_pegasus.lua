@@ -5,7 +5,7 @@ Fk:loadTranslationTable{
   ["steam_pegasus"] = "飞骥杯"
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 Fk:addGameEvent("GameEvent.DiscussionPindian", nil, function (self)
   local pindianData = table.unpack(self.data)

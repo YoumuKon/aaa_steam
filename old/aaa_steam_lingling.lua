@@ -1,8 +1,8 @@
 local extension = Package("aaa_steam_lingling")
 extension.extensionName = "aaa_steam"
 
-local U = require "packages/utility/utility"
-local LUtil = require "packages/aaa_steam/utility/ling_util"
+local U = require "packages.utility.utility"
+local LUtil = require "packages.aaa_steam.utility.ling_util"
 
 
 Fk:loadTranslationTable{

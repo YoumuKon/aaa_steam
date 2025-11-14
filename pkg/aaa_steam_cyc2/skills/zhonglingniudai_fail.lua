@@ -8,7 +8,7 @@ Fk:loadTranslationTable{
   "<br>☆若你整肃失败，你可以视为对自己使用一张冰【杀】，仍获得整肃奖励。",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 skel:addEffect(fk.EventPhaseStart, {
   can_trigger = function(self, event, target, player, data)

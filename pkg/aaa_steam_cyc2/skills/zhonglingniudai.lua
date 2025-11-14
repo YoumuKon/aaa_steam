@@ -50,7 +50,7 @@ Fk:loadTranslationTable{
   ["$steam__zhonglingniudai11"] = "赐我寒风！", -- 冰杀2
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 skel:addEffect(fk.EventPhaseStart, {
   can_trigger = function(self, event, target, player, data)

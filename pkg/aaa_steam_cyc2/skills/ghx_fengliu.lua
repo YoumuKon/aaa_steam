@@ -9,7 +9,7 @@ Fk:loadTranslationTable{
   ["$godhanxin__fengliu"] = "乾坤一簌天下游，月如钩难别求，第四枪，风流！",
 }
 
-local DIY = require "packages/diy_utility/diy_utility"
+local DIY = require "packages.diy_utility.diy_utility"
 
 skel:addEffect(fk.EventAcquireSkill, {
   anim_type = "switch",

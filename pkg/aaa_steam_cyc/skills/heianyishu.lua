@@ -9,7 +9,7 @@ Fk:loadTranslationTable{
   ["$steam__heianyishu_pile"] = "暗艺",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 skel:addEffect(fk.AfterCardsMove, {
   anim_type = "control",

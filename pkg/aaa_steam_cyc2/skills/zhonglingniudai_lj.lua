@@ -8,7 +8,7 @@ Fk:loadTranslationTable{
   "<br>☆若你“擂进”成功，你可以视为使用一张无视距离的雷【杀】。",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 skel:addEffect(fk.EventPhaseStart, {
   can_trigger = function(self, event, target, player, data)

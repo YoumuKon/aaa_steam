@@ -11,7 +11,7 @@ Fk:loadTranslationTable{
   ["#steam__xueqing-fire"] = "血倾：请选择使用【火攻】的目标（第 %arg 张，共 %arg2 张）",
 }
 
-local DIY = require "packages/diy_utility/diy_utility"
+local DIY = require "packages.diy_utility.diy_utility"
 
 skel:addEffect("active", {
   anim_type = "offensive",

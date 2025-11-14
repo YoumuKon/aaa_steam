@@ -1,5 +1,5 @@
 
-local DIY = require "packages/diy_utility/diy_utility"
+local DIY = require "packages.diy_utility.diy_utility"
 
 local liechen = fk.CreateSkill {
   name = "steam__liechen",

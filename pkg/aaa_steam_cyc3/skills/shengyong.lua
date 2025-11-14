@@ -15,7 +15,7 @@ Fk:loadTranslationTable{
   ["$steam__shengyong2"] = " ",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 skel:addEffect(fk.EventPhaseStart, {
   can_trigger = function(self, event, target, player, data)

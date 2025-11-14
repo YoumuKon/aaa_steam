@@ -1,7 +1,7 @@
 local extension = Package("aaa_steam_lingcards", Package.CardPack)
 extension.extensionName = "aaa_steam"
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 local drowningSkill = fk.CreateActiveSkill{
   name = "ling__drowning_skill",

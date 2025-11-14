@@ -3,7 +3,7 @@ local skill = fk.CreateSkill {
   attached_equip = "steam_ranjing_equip",
 }
 
-local DIY = require "packages/diy_utility/diy_utility"
+local DIY = require "packages.diy_utility.diy_utility"
 
 Fk:loadTranslationTable{
   ["#steam_ranjing_equip_skill"] = "旦夕墨宝",

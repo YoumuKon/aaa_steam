@@ -13,7 +13,7 @@ Fk:loadTranslationTable{
   ["$steam__xinsheng2"] = "",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 skel:addEffect(fk.EventPhaseStart, {
   anim_type = "control",

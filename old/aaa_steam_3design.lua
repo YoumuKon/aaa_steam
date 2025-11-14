@@ -1,9 +1,9 @@
 local extension = Package("aaa_steam_3design")
 extension.extensionName = "aaa_steam"
 
-local U = require "packages/utility/utility"
-local RUtil = require "packages/aaa_fenghou/utility/rfenghou_util"
-local DIY = require "packages/diy_utility/diy_utility"
+local U = require "packages.utility.utility"
+local RUtil = require "packages.aaa_fenghou.utility.rfenghou_util"
+local DIY = require "packages.diy_utility.diy_utility"
 
 Fk:loadTranslationTable{
   ["aaa_steam_3design"] = "三设吧赛选",

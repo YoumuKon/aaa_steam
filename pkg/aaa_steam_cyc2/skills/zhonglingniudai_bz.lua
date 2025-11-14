@@ -8,7 +8,7 @@ Fk:loadTranslationTable{
   "<br>☆若你“变阵”成功，你可以弃置一名其他角色区域内至多两张牌。",
 }
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 skel:addEffect(fk.EventPhaseStart, {
   can_trigger = function(self, event, target, player, data)

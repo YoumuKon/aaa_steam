@@ -1,7 +1,7 @@
 local extension = Package:new("aaa_steam_sanshe")
 extension.extensionName = "aaa_steam"
 
-local U = require "packages/utility/utility"
+local U = require "packages.utility.utility"
 
 Fk:loadTranslationTable{
   ["aaa_steam_sanshe"] = "散设",

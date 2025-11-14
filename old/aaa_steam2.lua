@@ -1,8 +1,8 @@
 local extension = Package("aaa_steam2")
 extension.extensionName = "aaa_steam"
 
-local U = require "packages/utility/utility"
-local RUtil = require "packages/aaa_fenghou/utility/rfenghou_util"
+local U = require "packages.utility.utility"
+local RUtil = require "packages.aaa_fenghou.utility.rfenghou_util"
 
 Fk:loadTranslationTable{
   ["aaa_steam2"] = "steam2",
