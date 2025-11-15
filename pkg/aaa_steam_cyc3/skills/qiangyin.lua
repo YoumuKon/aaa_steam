@@ -35,7 +35,7 @@ skel:addLoseEffect(function (self, player, is_death)
   end
   room:setPlayerMark(player, "@steam__qiangyin", 0)
   room:setPlayerMark(player, "steam__qiangyin_qiqin", 0)
-  room:setPlayerMark(player, "steam__qiangyin_hujia", 0)
+  room:setPlayerMark(player, "steam__qiangyin_shuangjia", 0)
   room:setPlayerMark(player, "steam__qiangyin_jiaowei", 0)
   room:setPlayerMark(player, "steam__qiangyin_jigu", 0)
 end)
@@ -127,7 +127,7 @@ skel:addEffect(fk.EventPhaseEnd, {
           elseif is == "笛" then
             room:addTableMarkIfNeed(player, "@steam__qiangyin", "羲笛") --激活羲笛
           elseif is == "胡笳" then
-            room:addTableMarkIfNeed(player, "steam__qiangyin_hujia", id) --记录胡笳的牌表方便判断失去
+            room:addTableMarkIfNeed(player, "steam__qiangyin_shuangjia", id) --记录胡笳的牌表方便判断失去
           elseif is == "弦" then
             room:addTableMarkIfNeed(player, "steam__qiangyin_jiaowei", id) --记录弦的牌表方便判断失去
           elseif is == "琴" then
@@ -143,45 +143,55 @@ skel:addEffect(fk.EventPhaseEnd, {
 skel:addEffect(fk.AfterCardsMove, {
   anim_type = "drawcard",
   can_trigger = function(self, event, target, player, data)
-    if player:hasSkill(skel.name) and player:getMark("steam__qiangyin_hujia") ~= 0 then
-      local cards = {}
+    if player:hasSkill(skel.name, true) then
       for _, move in ipairs(data) do
         if move.from == player then
           for _, info in ipairs(move.moveInfo) do
-            if info.fromArea == Card.PlayerHand and table.contains(player:getTableMark("steam__qiangyin_hujia"), info.cardId) then
-              table.insertIfNeed(cards, info.cardId)
+            if info.fromArea == Card.PlayerHand and table.contains(player:getTableMark("steam__qiangyin_shuangjia"), info.cardId) then
+              return true
             end
           end
         end
-      end
-      if #cards > 0 then
-        event:setCostData(self, {cards = cards})
-        return true
       end
     end
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
-    for _, id in ipairs(event:getCostData(self).cards) do
-      room:removeTableMark(player, "steam__qiangyin_hujia", id)
-    end
-    local num = math.random(1, 3)
-    local cards = {}
-    for _, ids in ipairs(room.draw_pile) do
-      if not table.find(cards, function (idss) return Fk:getCardById(idss).suit == Fk:getCardById(ids).suit end) then
-        table.insertIfNeed(cards, ids)
+    local cardss = table.filter(player:getCardIds("h"), function (id)
+      return Fk:getCardById(id):getMark("@steam__qiangyin-inhand") == "胡笳"
+    end)
+    local yes = false
+    for _, move in ipairs(data) do
+      if move.from == player then
+        for _, info in ipairs(move.moveInfo) do
+          if info.fromArea == Card.PlayerHand and
+            table.contains(player:getTableMark("steam__qiangyin_shuangjia"), info.cardId) and
+            not table.contains(cardss, info.cardId) then
+            yes = true
+          end
+        end
       end
-      if #cards >= num then break end
     end
-    if #cards > 0 then
-      room:moveCards({
-        ids = cards,
-        to = player,
-        toArea = Card.PlayerHand,
-        moveReason = fk.ReasonPrey,
-        proposer = player,
-        skillName = skel.name,
-      })
+    room:setPlayerMark(player, "steam__qiangyin_shuangjia", cardss)
+    if yes and player:hasSkill(skel.name) then
+      local num = math.random(1, 3)
+      local cards = {}
+      for _, ids in ipairs(room.draw_pile) do
+        if not table.find(cards, function (idss) return Fk:getCardById(idss).suit == Fk:getCardById(ids).suit end) then
+          table.insertIfNeed(cards, ids)
+        end
+        if #cards >= num then break end
+      end
+      if #cards > 0 then
+        room:moveCards({
+          ids = cards,
+          to = player,
+          toArea = Card.PlayerHand,
+          moveReason = fk.ReasonPrey,
+          proposer = player,
+          skillName = skel.name,
+        })
+      end
     end
   end,
 })
@@ -254,8 +264,8 @@ local spec = {
   can_trigger = function(self, event, target, player, data)
     return target == player and player:hasSkill(skel.name) and table.contains(player:getTableMark("@steam__qiangyin"), "激鼓") and
       #table.filter(player:getCardIds("h"), function (id) return Fk:getCardById(id):getMark("@steam__qiangyin-inhand") == "激鼓" end) == #player:getCardIds("e")
-      and #player:getAvailableEquipSlots() > #player:getCardIds("e") and player:usedEffectTimes("#steam__qiangyin_8_trig", Player.HistoryRound) +
-      player:usedEffectTimes("#steam__qiangyin_9_trig", Player.HistoryRound) == 0
+      and #player:getAvailableEquipSlots() > #player:getCardIds("e") and player:usedEffectTimes("#steam__qiangyin_7_trig", Player.HistoryRound) +
+      player:usedEffectTimes("#steam__qiangyin_8_trig", Player.HistoryRound) == 0
   end,
   on_use = function(self, event, target, player, data)
     local n = #player:getAvailableEquipSlots() - #player:getCardIds("e")
