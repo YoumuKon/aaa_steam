@@ -38,7 +38,7 @@ qianju:addLoseEffect(function(self, player, is_death)
   end
 end)
 
-qianju:addEffect(fk.CardUsing, {
+qianju:addEffect(fk.PreCardUse, {
   can_refresh = function(self, event, target, player, data)
     if target == player and player:hasSkill(qianju.name) and data.card and data.card.type ~= Card.TypeEquip then
       for _, to in ipairs(data:getAllTargets()) do
@@ -50,7 +50,9 @@ qianju:addEffect(fk.CardUsing, {
   end,
   on_refresh = function(self, event, target, player, data)
     local room = player.room
-    room.logic:getCurrentEvent():addExitFunc(function()
+    local cardUse = room.logic:getMostRecentEvent(GameEvent.UseCard)
+    if not cardUse then return end
+    cardUse:addExitFunc(function()
       player:drawCards(2, qianju.name)
     end)
   end,
