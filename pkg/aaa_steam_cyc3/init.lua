@@ -89,6 +89,15 @@ Fk:loadTranslationTable{
   ["~steam__fourth_chorus"] = "",
 }
 
+General:new(extension, "steam__seth", "hollow", 4):addSkills{"steam__jianke", "steam__shiwei"}
+Fk:loadTranslationTable{
+  ["steam__seth"] = "赛斯",
+  ["#steam__seth"] = "甲木林第一高手",
+  ["designer:steam__seth"] = "cyc",
+  ["illustrator:steam__seth"] = "",
+  ["~steam__seth"] = "",
+}
+
 General:new(extension, "steam__goddiaochan", "god", 3, 3, General.Female):addSkills { "steam__meihun", "steam__huoxin" }
 Fk:loadTranslationTable{
   ["steam__goddiaochan"] = "神貂蝉",
