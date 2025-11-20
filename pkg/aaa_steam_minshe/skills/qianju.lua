@@ -39,22 +39,31 @@ qianju:addLoseEffect(function(self, player, is_death)
 end)
 
 qianju:addEffect(fk.PreCardUse, {
-  can_refresh = function(self, event, target, player, data)
+  anim_type = "offensive",
+  can_trigger = function(self, event, target, player, data)
     if target == player and player:hasSkill(qianju.name) and data.card and data.card.type ~= Card.TypeEquip then
       for _, to in ipairs(data:getAllTargets()) do
-        if to:getMark("@@steamMinshe__qianju_reason_use") ~= 0 and to:getMark("@@steamMinshe__qianju_reason_discard") ~= 0 then
+        if to:getMark("@@steamMinshe__qianju_reason_use") ~= 0 or to:getMark("@@steamMinshe__qianju_reason_discard") ~= 0 then
           return true
         end
       end
     end
   end,
-  on_refresh = function(self, event, target, player, data)
+  on_use = function(self, event, target, player, data)
     local room = player.room
     local cardUse = room.logic:getMostRecentEvent(GameEvent.UseCard)
     if not cardUse then return end
-    cardUse:addExitFunc(function()
-      player:drawCards(2, qianju.name)
-    end)
+    for _, to in ipairs(data:getAllTargets()) do
+      if to:getMark("@@steamMinshe__qianju_reason_use") ~= 0 then
+        data.extraUse = true
+        if to:getMark("@@steamMinshe__qianju_reason_discard") ~= 0 then
+          cardUse:addExitFunc(function()
+            player:drawCards(2, qianju.name)
+          end)
+          return
+        end
+      end
+    end
   end,
 })
 qianju:addEffect(fk.AfterCardsMove, {
