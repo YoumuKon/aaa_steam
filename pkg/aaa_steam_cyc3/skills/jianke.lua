@@ -4,7 +4,7 @@ local skel = fk.CreateSkill{
 
 Fk:loadTranslationTable{
   ["steam__jianke"] = "坚壳",
-  [":steam__jianke"] = "每轮开始时，你获取一张随机防具并可以使用。若你的装备区内有防具牌，你使用或被使用伤害牌时摸一张牌；反之，你受到伤害后摸一张牌。",
+  [":steam__jianke"] = "每轮开始时，你获取一张随机防具并可以使用。若你的装备区内有防具牌，你每回合首次使用或被使用伤害牌时摸一张牌；反之，你受到伤害后摸一张牌。",
 
   ["$steam__jianke1"] = " ",
   ["$steam__jianke2"] = " ",
@@ -12,12 +12,15 @@ Fk:loadTranslationTable{
 
 local U = require "packages.utility.utility"
 
+--隐藏结算，每种防具牌只有一张
 local jianke_list = {
-  {"eight_diagram", Card.Spade, 2}, {"eight_diagram", Card.Club, 2},
-  {"nioh_shield", Card.Club, 2}, {"silver_lion", Card.Club, 1},
-  {"vine", Card.Spade, 2}, {"vine", Card.Club, 2}, 
-  {"breastplate", Card.Club, 1}, {"dark_armor", Card.Club, 2},
-  {"glittery_armor", Card.Club, 2}, {"glittery_armor", Card.Spade, 2},
+  {"eight_diagram", Card.Spade, 2},
+  {"nioh_shield", Card.Club, 2}, 
+  {"silver_lion", Card.Club, 1},
+  {"vine", Card.Club, 2}, 
+  {"breastplate", Card.Club, 1},
+  {"dark_armor", Card.Club, 2},
+  {"glittery_armor", Card.Club, 2},
   {"night_cloth", Card.Spade, 10}
 }
 
@@ -52,7 +55,6 @@ skel:addEffect(fk.RoundStart, {
   end,
 })
 
---隐藏结算，每回合限一次
 skel:addEffect(fk.CardUsing, {
   anim_type = "drawcard",
   can_trigger = function(self, event, target, player, data)
