@@ -65,7 +65,7 @@ pitianlidi:addEffect(fk.Damage, {
     room:askToUseVirtualCard(player, {
       name = "slash",
       skill_name = pitianlidi.name,
-      prompt = "#steam__pitianlidi-slash:::" .. data.damage,
+      prompt = "#steam__pitianlidi-slash:::" .. data.card:toLogString(),
       cancelable = false,
       subcards = Card:getIdList(data.card),
     })
