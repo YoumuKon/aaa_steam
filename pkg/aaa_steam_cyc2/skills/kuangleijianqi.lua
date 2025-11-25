@@ -23,9 +23,6 @@ Fk:addQmlMark{
     end
     return "#hidden"
   end,
-  qml_path = function(name, value, player)
-    return "package/aaa_steam/qml/marks/ComboEventCounterMark"
-  end
 }
 
 kuangleijianqi:addEffect(fk.CardUseFinished, {
