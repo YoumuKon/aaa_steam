@@ -87,7 +87,7 @@ kuangleijianqi:addEffect(fk.AfterCardUseDeclared, {
     local mark = player:getTableMark("@[combo_eventcounter]steam__kuangleijianqi")
     if #mark > 0 and #turns > 2 then
       local previous = mark[#mark] ---@type GameEvent.UseCard
-      if previous.id < turns[#turns - 2].id then
+      if previous.id < turns[#turns - 1].id then
         mark = {}
       end
     end
