@@ -28,35 +28,30 @@ local spec = { ---@type TrigSkelSpec<fun(self: TriggerSkill, event: DamageEvent,
     local room = player.room
     local use = event:getCostData(self).use ---@type UseCardDataSpec
     room:useCard(use)
-    room:addCardMark(use.card, "steam__pitianlidi-inarea")
+    for _, cid in ipairs(Card:getIdList(use.card)) do
+      room:setCardMark(Fk:getCardById(cid, true), "steam__pitianlidi-inarea", { Card.PlayerJudge, Card.Processing })
+    end
   end,
 }
 pitianlidi:addEffect(fk.Damage, spec)
 pitianlidi:addEffect(fk.Damaged, spec)
 
-pitianlidi:addEffect(fk.Damage, {
-  is_delay_effect = true,
-  can_trigger = function(self, event, target, player, data)
-    if target == player and player:hasSkill(pitianlidi.name) and data.card and data.card.name == "floating_thunder" then
-      return #data.card.subcards > 0 and data.card:getMark("steam__pitianlidi-inarea") > 0
+---@param card Card
+local isThatCard = function(card)
+  local ids = Card:getIdList(card)
+  if #ids == 0 then return false end
+  for _, cid in ipairs(ids) do
+    if Fk:getCardById(cid, true):getMark("steam__pitianlidi-inarea") == 0 then
+      return false
     end
-  end,
-  on_use = function(self, event, target, player, data)
-    local room = player.room
-    room:setCardMark(data.card, "steam__pitianlidi-inarea", 0)
-    room:askToUseVirtualCard(player, {
-      name = "slash",
-      skill_name = pitianlidi.name,
-      prompt = "#steam__pitianlidi-slash:::" .. data.card:toLogString(),
-      cancelable = false,
-      subcards = Card:getIdList(data.card),
-    })
-  end,
-})
+  end
+  return true
+end
+
 pitianlidi:addEffect(fk.Damage, {
   is_delay_effect = true,
   can_trigger = function(self, event, target, player, data)
-    if target == player and player:hasSkill(pitianlidi.name) and data.card and data.card.name == "floating_thunder" and data.card:getMark("steam__pitianlidi-inarea") > 0 then
+    if player:hasSkill(pitianlidi.name) and data.card and data.card.name == "floating_thunder" and isThatCard(data.card) then
       local slash = Fk:cloneCard("slash")
       slash:addSubcards(Card:getIdList(data.card))
       slash.skillName = pitianlidi.name
@@ -79,8 +74,9 @@ pitianlidi:addEffect(fk.Damage, {
 pitianlidi:addEffect(fk.DetermineDamageCaused, {
   is_delay_effect = true,
   can_trigger = function(self, event, target, player, data)
-    if target == player and player:hasSkill(pitianlidi.name) and data.card and data.card.name == "floating_thunder" and data.card:getMark("steam__pitianlidi-inarea") > 0 then
-      return player.room:getOtherPlayers(player, false)[1]
+    if data.to == player and player:hasSkill(pitianlidi.name) and data.card and data.card.name == "floating_thunder" then
+      local effect_event = player.room.logic:getMostRecentEvent(GameEvent.CardEffect, 2)
+      return effect_event and isThatCard(effect_event.data.card) and player.room:getOtherPlayers(player, false)[1]
     end
   end,
   on_cost = Util.TrueFunc,
