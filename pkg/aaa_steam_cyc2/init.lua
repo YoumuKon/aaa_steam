@@ -176,6 +176,16 @@ Fk:loadTranslationTable{
   ["~steam__udyr"] = "终于……一片寂静……",
 }
 
+General:new(extension, "steam__volibear", "west", 4):addSkills{"steam__kuangleijianqi", "steam__pitianlidi"}
+Fk:loadTranslationTable{
+  ["steam__volibear"] = "沃利贝尔",
+  ["#steam__volibear"] = "不灭狂雷",
+  ["illustrator:steam__udyr"] = "",
+  ["designer:steam__udyr"] = "猫",
+
+  -- ["~steam__volibear"] = "",
+}
+
 
 
 

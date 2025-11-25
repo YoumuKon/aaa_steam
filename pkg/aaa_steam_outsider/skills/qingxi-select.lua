@@ -1,5 +1,5 @@
 local qingxi = fk.CreateSkill {
-  name = "#steamMinshe__qingxi_active",
+  name = "#aaa_steam_outsider__qingxi_active",
 }
 
 qingxi:addEffect("active", {
@@ -8,9 +8,9 @@ qingxi:addEffect("active", {
   end,
   prompt = function(self, player, selected_cards, selected_targets)
     if self.interaction.data then
-      return "#steamMinshe__qingxi-select:::" .. self.interaction.data
+      return "#aaa_steam_outsider__qingxi-select:::" .. self.interaction.data
     end
-    return "#steamMinshe__qingxi-select:::" .. table.concat(table.map(self.choices, Util.TranslateMapper), "/")
+    return "#aaa_steam_outsider__qingxi-select:::" .. table.concat(table.map(self.choices, Util.TranslateMapper), "/")
   end,
   card_num = 0,
   card_filter = Util.FalseFunc,
@@ -21,8 +21,8 @@ qingxi:addEffect("active", {
 })
 
 Fk:loadTranslationTable{
-  ["#steamMinshe__qingxi_active"] = "倾袭",
-  ["#steamMinshe__qingxi-select"] = "倾袭：请选择令一名角色%arg一张牌",
+  ["#aaa_steam_outsider__qingxi_active"] = "倾袭",
+  ["#aaa_steam_outsider__qingxi-select"] = "倾袭：请选择令一名角色%arg一张牌",
 
   ["discard"] = "弃置",
   ["recast"] = "重铸",

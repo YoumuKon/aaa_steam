@@ -1,5 +1,5 @@
 local qingxi = fk.CreateSkill {
-  name = "steamMinshe__qingxi",
+  name = "aaa_steam_outsider__qingxi",
 }
 
 --- @param player ServerPlayer
@@ -20,7 +20,7 @@ local function runQianXi(player, choice)
       max_num = 1,
       include_equip = true,
       skill_name = qingxi.name,
-      prompt = "#steamMinshe__qingxi-recast",
+      prompt = "#aaa_steam_outsider__qingxi-recast",
       cancelable = false,
     })
     if #cards > 0 then
@@ -43,7 +43,7 @@ qingxi:addEffect(fk.EventPhaseProceeding, {
   on_cost = function(self, event, target, player, data)
     return player.room:askToSkillInvoke(player, {
       skill_name = qingxi.name,
-      prompt = "#steamMinshe__qingxi-invoke",
+      prompt = "#aaa_steam_outsider__qingxi-invoke",
     })
   end,
   on_use = function(self, event, target, player, data)
@@ -70,7 +70,7 @@ qingxi:addEffect(fk.EventPhaseProceeding, {
           max_num = 1,
           include_equip = true,
           skill_name = qingxi.name,
-          prompt = "#steamMinshe__qingxi-recast",
+          prompt = "#aaa_steam_outsider__qingxi-recast",
           cancelable = false,
         })[1]
         if card then
@@ -106,8 +106,8 @@ qingxi:addEffect(fk.EventPhaseProceeding, {
     end
     if card_pairs then
       local _, dat = room:askToUseActiveSkill(player, {
-        skill_name = "#steamMinshe__qingxi_active",
-        prompt = "#steamMinshe__qingxi-select:::" .. table.concat(table.map(card_pairs, Util.TranslateMapper), "/"),
+        skill_name = "#aaa_steam_outsider__qingxi_active",
+        prompt = "#aaa_steam_outsider__qingxi-select:::" .. table.concat(table.map(card_pairs, Util.TranslateMapper), "/"),
         extra_data = {
           skillName = qingxi.name,
           choices = card_pairs,
@@ -136,7 +136,7 @@ qingxi:addEffect(fk.EventPhaseProceeding, {
           max_num = 1,
           targets = room.alive_players,
           skill_name = qingxi.name,
-          prompt = "#steamMinshe__qingxi-select:::" .. choice,
+          prompt = "#aaa_steam_outsider__qingxi-select:::" .. choice,
         })[1]
         if to then
           runQianXi(to, choice)
@@ -147,14 +147,14 @@ qingxi:addEffect(fk.EventPhaseProceeding, {
 })
 
 Fk:loadTranslationTable{
-  ["steamMinshe__qingxi"] = "倾袭",
-  [":steamMinshe__qingxi"] = "准备阶段，你可以依次弃置，重铸，使用一张牌，若恰有两项：类型相同，你令一名角色执行其中一项；花色相同：你令一名角色执行余下一项。",
+  ["aaa_steam_outsider__qingxi"] = "倾袭",
+  [":aaa_steam_outsider__qingxi"] = "准备阶段，你可以依次弃置，重铸，使用一张牌，若恰有两项：类型相同，你令一名角色执行其中一项；花色相同：你令一名角色执行余下一项。",
 
-  ["#steamMinshe__qingxi-invoke"] = "倾袭：你可以弃置，重铸，使用一张牌，若恰有两项的牌类型/花色相同，你令一名角色执行其中/余下一项",
-  ["#steamMinshe__qingxi-recast"] = "倾袭：请重铸一张牌",
+  ["#aaa_steam_outsider__qingxi-invoke"] = "倾袭：你可以弃置，重铸，使用一张牌，若恰有两项的牌类型/花色相同，你令一名角色执行其中/余下一项",
+  ["#aaa_steam_outsider__qingxi-recast"] = "倾袭：请重铸一张牌",
 
-  ["$steamMinshe__qingxi1"] = "策马疾如电，溃敌一瞬间。",
-  ["$steamMinshe__qingxi2"] = "虎豹骑岂能徒有虚名？杀！",
+  ["$aaa_steam_outsider__qingxi1"] = "策马疾如电，溃敌一瞬间。",
+  ["$aaa_steam_outsider__qingxi2"] = "虎豹骑岂能徒有虚名？杀！",
 }
 
 return qingxi

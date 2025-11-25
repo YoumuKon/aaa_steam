@@ -1,5 +1,5 @@
 local qianju = fk.CreateSkill {
-  name = "steamMinshe__qianju",
+  name = "aaa_steam_outsider__qianju",
   tags = { Skill.Compulsory }
 }
 
@@ -23,7 +23,7 @@ qianju:addAcquireEffect(function(self, player, is_start)
     end
   end, 0)
   for reason, to in pairs(ret) do
-    local mark = "@@steamMinshe__qianju_" .. Util.moveReasonMapper(reason)
+    local mark = "@@aaa_steam_outsider__qianju_" .. Util.moveReasonMapper(reason)
     room:setPlayerMark(to, mark, 1)
   end
 end)
@@ -33,8 +33,8 @@ qianju:addLoseEffect(function(self, player, is_death)
     return p:hasSkill(qianju.name, true)
   end) then return end
   for _, to in ipairs(room.alive_players) do
-    room:setPlayerMark(to, "@@steamMinshe__qianju_reason_use", 0)
-    room:setPlayerMark(to, "@@steamMinshe__qianju_reason_discard", 0)
+    room:setPlayerMark(to, "@@aaa_steam_outsider__qianju_reason_use", 0)
+    room:setPlayerMark(to, "@@aaa_steam_outsider__qianju_reason_discard", 0)
   end
 end)
 
@@ -43,7 +43,7 @@ qianju:addEffect(fk.PreCardUse, {
   can_trigger = function(self, event, target, player, data)
     if target == player and player:hasSkill(qianju.name) and data.card and data.card.type ~= Card.TypeEquip then
       for _, to in ipairs(data:getAllTargets()) do
-        if to:getMark("@@steamMinshe__qianju_reason_use") ~= 0 or to:getMark("@@steamMinshe__qianju_reason_discard") ~= 0 then
+        if to:getMark("@@aaa_steam_outsider__qianju_reason_use") ~= 0 or to:getMark("@@aaa_steam_outsider__qianju_reason_discard") ~= 0 then
           return true
         end
       end
@@ -54,9 +54,9 @@ qianju:addEffect(fk.PreCardUse, {
     local cardUse = room.logic:getMostRecentEvent(GameEvent.UseCard)
     if not cardUse then return end
     for _, to in ipairs(data:getAllTargets()) do
-      if to:getMark("@@steamMinshe__qianju_reason_use") ~= 0 then
+      if to:getMark("@@aaa_steam_outsider__qianju_reason_use") ~= 0 then
         data.extraUse = true
-        if to:getMark("@@steamMinshe__qianju_reason_discard") ~= 0 then
+        if to:getMark("@@aaa_steam_outsider__qianju_reason_discard") ~= 0 then
           cardUse:addExitFunc(function()
             player:drawCards(2, qianju.name)
           end)
@@ -72,7 +72,7 @@ qianju:addEffect(fk.AfterCardsMove, {
       if move.from == player and move.to ~= player and table.contains({ fk.ReasonDiscard, fk.ReasonUse }, move.moveReason) then
         for _, info in ipairs(move.moveInfo) do
           if table.contains({ Player.Hand, Player.Equip }, info.fromArea) and player.room:getCardOwner(info.cardId) ~= player then
-            event:setSkillData(self, "steamMinshe__qianju_reason", Util.moveReasonMapper(move.moveReason))
+            event:setSkillData(self, "aaa_steam_outsider__qianju_reason", Util.moveReasonMapper(move.moveReason))
             return true
           end
         end
@@ -81,7 +81,7 @@ qianju:addEffect(fk.AfterCardsMove, {
   end,
   on_refresh = function(self, event, target, player, data)
     local room = player.room
-    local mark = "@@steamMinshe__qianju_" .. event:getSkillData(self, "steamMinshe__qianju_reason")
+    local mark = "@@aaa_steam_outsider__qianju_" .. event:getSkillData(self, "aaa_steam_outsider__qianju_reason")
     for _, to in ipairs(room.alive_players) do
       if to == player then
         room:setPlayerMark(to, mark, 1)
@@ -93,23 +93,23 @@ qianju:addEffect(fk.AfterCardsMove, {
 })
 qianju:addEffect("targetmod", {
   bypass_distances = function(self, player, skill, card, to)
-    if player:hasSkill(qianju.name) and to:getMark("@@steamMinshe__qianju_reason_discard") ~= 0 and card and card.type ~= Card.TypeEquip then
+    if player:hasSkill(qianju.name) and to:getMark("@@aaa_steam_outsider__qianju_reason_discard") ~= 0 and card and card.type ~= Card.TypeEquip then
       return true
     end
   end,
   bypass_times = function(self, player, skill, scope, card, to)
-    if player:hasSkill(qianju.name) and to and to:getMark("@@steamMinshe__qianju_reason_use") ~= 0 and card and card.type ~= Card.TypeEquip then
+    if player:hasSkill(qianju.name) and to and to:getMark("@@aaa_steam_outsider__qianju_reason_use") ~= 0 and card and card.type ~= Card.TypeEquip then
       return true
     end
   end
 })
 
 Fk:loadTranslationTable{
-  ["steamMinshe__qianju"] = "千驹",
-  [":steamMinshe__qianju"] = "锁定技，你对上一名因弃置/使用失去牌的角色使用非装备牌无距离/次数限制，若为同一名角色，此牌结算后你摸两张牌。",
+  ["aaa_steam_outsider__qianju"] = "千驹",
+  [":aaa_steam_outsider__qianju"] = "锁定技，你对上一名因弃置/使用失去牌的角色使用非装备牌无距离/次数限制，若为同一名角色，此牌结算后你摸两张牌。",
 
-  ["@@steamMinshe__qianju_reason_use"] = "千驹 使用",
-  ["@@steamMinshe__qianju_reason_discard"] = "千驹 弃置",
+  ["@@aaa_steam_outsider__qianju_reason_use"] = "千驹 使用",
+  ["@@aaa_steam_outsider__qianju_reason_discard"] = "千驹 弃置",
 }
 
 return qianju
