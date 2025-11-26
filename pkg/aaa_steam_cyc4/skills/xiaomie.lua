@@ -6,7 +6,7 @@ local skel = fk.CreateSkill {
 Fk:loadTranslationTable{
   ["steam__xiaomie"] = "嚣灭",
   [":steam__xiaomie"] = "<a href='steam__xiaomie_combo-href'>连招技</a>（赢+赢+赢+赢），你视为使用一张拥有前X项效果的【杀】：1目标上限改为X；2无视距离与防具；3.不可响应；"..
-  "4.改为冰【杀】。断招时，除非你重铸X张不同类别的牌以保留进度，否则立即施放。（X为当前连段数）",
+  "4.改为冰【杀】。断招时立即施放，若为本回合首次，你可以重铸X张不同类别的牌以保留进度。（X为当前连段数）",
 
   ["@steam__xiaomie"] = "嚣灭",
   ["#steam__xiaomie"] = "嚣灭：请视为对至少一名角色使用【杀】！",
@@ -69,17 +69,22 @@ local xiaomieKeep = function (player)
   local x =  #player:getTableMark("@steam__xiaomie")
   player.room:notifySkillInvoked(player, skel.name, "negative")
   player:broadcastSkillInvoke(skel.name, 1)
+  player:addMark("steam__xiaomie_lose-turn", 1)
   if player:isNude() or player.dead or x == 0 then return false end
-  local _, dat = player.room:askToUseActiveSkill(player, {
-    skill_name = "steam__xiaomie_active",
-    prompt = "#steam__xiaomie-exclu",
-    no_indicate = true,
-    cancelable = true,
-  })
-  if dat then
-    player.room:recastCard(dat.cards, player, skel.name)
-    if #dat.cards == x then
-      return true
+  if player:getMark("steam__xiaomie_lose-turn") == 1 then
+    local _, dat = player.room:askToUseActiveSkill(player, {
+      skill_name = "steam__xiaomie_active",
+      prompt = "#steam__xiaomie-exclu",
+      no_indicate = true,
+      cancelable = true,
+    })
+    if dat then
+      player.room:recastCard(dat.cards, player, skel.name)
+      if #dat.cards == x then
+        return true
+      else
+        return false
+      end
     else
       return false
     end

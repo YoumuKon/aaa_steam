@@ -74,17 +74,22 @@ local xiaomieKeep = function (player)
   local x =  #player:getTableMark("@steam__xiaomie")
   player.room:notifySkillInvoked(player, "steam__xiaomie", "negative")
   player:broadcastSkillInvoke("steam__xiaomie", 1)
+  player:addMark("steam__xiaomie_lose-turn", 1)
   if player:isNude() or player.dead or x == 0 then return false end
-  local _, dat = player.room:askToUseActiveSkill(player, {
-    skill_name = "steam__xiaomie_active",
-    prompt = "#steam__xiaomie-exclu",
-    no_indicate = true,
-    cancelable = true,
-  })
-  if dat then
-    player.room:recastCard(dat.cards, player, "steam__xiaomie")
-    if #dat.cards == x then
-      return true
+  if player:getMark("steam__xiaomie_lose-turn") == 1 then
+    local _, dat = player.room:askToUseActiveSkill(player, {
+      skill_name = "steam__xiaomie_active",
+      prompt = "#steam__xiaomie-exclu",
+      no_indicate = true,
+      cancelable = true,
+    })
+    if dat then
+      player.room:recastCard(dat.cards, player, "steam__xiaomie")
+      if #dat.cards == x then
+        return true
+      else
+        return false
+      end
     else
       return false
     end
