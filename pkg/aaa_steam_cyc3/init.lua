@@ -98,7 +98,7 @@ Fk:loadTranslationTable{
   ["~steam__seth"] = "",
 }
 
-local shakra = General:new(extension, "steam__shakra", "hollow", 4)--
+local shakra = General:new(extension, "steam__shakra", "hollow", 3)--
 shakra:addSkills{"steam__huiji", "steam__zhange"}
 shakra:addRelatedSkills{ "steam__tiaoxin" }
 Fk:loadTranslationTable{
