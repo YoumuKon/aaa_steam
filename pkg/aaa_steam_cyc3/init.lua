@@ -98,6 +98,17 @@ Fk:loadTranslationTable{
   ["~steam__seth"] = "",
 }
 
+local shakra = General:new(extension, "steam__shakra", "hollow", 4)--
+shakra:addSkills{"steam__huiji", "steam__zhange"}
+shakra:addRelatedSkills{ "steam__tiaoxin" }
+Fk:loadTranslationTable{
+  ["steam__shakra"] = "沙克拉",
+  ["#steam__shakra"] = "游击地图师",
+  ["designer:steam__shakra"] = "cyc",
+  ["illustrator:steam__shakra"] = "",
+  ["~steam__shakra"] = "",
+}
+
 General:new(extension, "steam__goddiaochan", "god", 3, 3, General.Female):addSkills { "steam__meihun", "steam__huoxin" }
 Fk:loadTranslationTable{
   ["steam__goddiaochan"] = "神貂蝉",
