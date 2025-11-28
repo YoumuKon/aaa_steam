@@ -34,12 +34,16 @@ kuangleijianqi:addEffect(fk.CardUseFinished, {
   on_cost = function(self, event, target, player, data)
     return player.room:askToSkillInvoke(player, {
       skill_name = kuangleijianqi.name,
-      prompt = "#steam__kuangleijianqi-invoke",
+      prompt = "#steam__kuangleijianqi-invoke:::" .. (player.chained and "#steam__kuangleijianqi_middle" or ""),
     })
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
     local mark = data.extra_data.steam__kuangleijianqi_datas ---@type table<number, {id: number, tos: ServerPlayer[]}>
+    local chained = false
+    if player.chained then
+      player:setChainState(false)
+    end
     for _, e in ipairs(mark) do
       local tos = e.tos
       local players = table.filter(room:getAlivePlayers(true), function(p)
@@ -54,6 +58,9 @@ kuangleijianqi:addEffect(fk.CardUseFinished, {
               who = player,
               reason = kuangleijianqi.name,
             })
+            if not chained and to ~= player then
+              chained = true
+            end
           end
         end
       elseif player:isWounded() then
@@ -66,7 +73,11 @@ kuangleijianqi:addEffect(fk.CardUseFinished, {
       end
     end
     local num = player:getMark(kuangleijianqi.name)
-    if num < 4 and room:askToSkillInvoke(player, {
+    if not chained then
+      if num > 0 then
+        room:removePlayerMark(player, kuangleijianqi.name)
+      end
+    elseif num < 4 and room:askToSkillInvoke(player, {
       skill_name = kuangleijianqi.name,
       prompt = "#steam__kuangleijianqi-delete",
     }) then
@@ -126,18 +137,20 @@ kuangleijianqi:addEffect(fk.TurnStart, {
 Fk:loadTranslationTable{
   ["steam__kuangleijianqi"] = "狂雷渐起",
   [":steam__kuangleijianqi"] = "连招技（牌+牌+牌+牌+牌，【当你使用牌时，若你上回合未使用牌，重置此进度】），<br>"..
-  "你可以依次令连招中牌的每个目标依次横置（已横置则改为你摸一张牌），<br>"..
+  "你可以重置武将牌（已重置则跳过），然后依次令连招中牌的每个目标依次横置（已横置则改为你摸一张牌），<br>"..
   "若无存活目标则改为你回复1点体力。<br>"..
-  "然后你可以删除此连招技的一个条件。",
+  "然后你可以删除此连招技的一个条件，若没有其他角色因此横置，改为你须复原此连招技的一个条件。",
 
   [":steam__kuangleijianqi-dynamic"] = "连招技（{1}，【当你使用牌时，若你上回合未使用牌，重置此进度】），<br>"..
-  "你可以依次令连招中牌的每个目标依次横置（已横置则改为你摸一张牌），<br>"..
+  "你可以重置武将牌（已重置则跳过），然后依次令连招中牌的每个目标依次横置（已横置则改为你摸一张牌），<br>"..
   "若无存活目标则改为你回复1点体力。<br>"..
-  "然后你可以删除此连招技的一个条件。",
+  "然后你可以删除此连招技的一个条件，若没有其他角色因此横置，改为你须复原此连招技的一个条件。",
   ["card"] = "牌",
 
-  ["#steam__kuangleijianqi-invoke"] = "狂雷渐起：你可以令连招中牌的每个目标依次横置（已横置则改为你摸一张牌），若无存活目标则改为你回复1点体力",
+  ["#steam__kuangleijianqi-invoke"] = "狂雷渐起：你可以%arg令连招中牌的每个目标依次横置（已横置则改为你摸一张牌），若无存活目标则改为你回复1点体力",
   ["#steam__kuangleijianqi-delete"] = "狂雷渐起：你可以删除〖狂雷渐起〗的一个条件",
+
+  ["#steam__kuangleijianqi_middle"] = "重置武将牌，<br>然后",
 
   ["@[combo_eventcounter]steam__kuangleijianqi"] = "狂雷渐起",
 }
