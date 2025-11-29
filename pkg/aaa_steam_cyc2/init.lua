@@ -180,8 +180,8 @@ General:new(extension, "steam__volibear", "west", 4):addSkills{"steam__kuangleij
 Fk:loadTranslationTable{
   ["steam__volibear"] = "沃利贝尔",
   ["#steam__volibear"] = "不灭狂雷",
-  ["illustrator:steam__udyr"] = "",
-  ["designer:steam__udyr"] = "猫",
+  ["illustrator:steam__volibear"] = "",
+  ["designer:steam__volibear"] = "猫",
 
   -- ["~steam__volibear"] = "",
 }
