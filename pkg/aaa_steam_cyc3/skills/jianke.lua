@@ -4,7 +4,7 @@ local skel = fk.CreateSkill{
 
 Fk:loadTranslationTable{
   ["steam__jianke"] = "坚壳",
-  [":steam__jianke"] = "每轮开始时，你获取一张随机防具并可以使用。若你的装备区内有防具牌，你每回合首次使用或被使用伤害牌时摸一张牌；反之，你受到伤害后摸一张牌。",
+  [":steam__jianke"] = "游戏开始时，你获得一张防具牌并可以使用。若你的装备区内有防具牌，你每回合首次被使用伤害牌时摸一张牌；反之，你每回合首次造成或受到伤害时摸一张牌。",
 
   ["$steam__jianke1"] = " ",
   ["$steam__jianke2"] = " ",
@@ -25,7 +25,7 @@ local jianke_list = {
 }
 
 --隐藏结算，每轮获得的防具牌不与上一轮相同
-skel:addEffect(fk.RoundStart, {
+skel:addEffect(fk.GameStart, {
   anim_type = "defensive",
   can_trigger = function(self, event, target, player, data)
     return player:hasSkill(skel.name)
@@ -45,7 +45,7 @@ skel:addEffect(fk.RoundStart, {
       end)
       local deal
       deal = table.random(get, 1)[1]
-      room:setCardMark(Fk:getCardById(deal), MarkEnum.DestructOutMyEquip, 1)
+      room:setCardMark(Fk:getCardById(deal), MarkEnum.DestructOutEquip, 1)
       room:setPlayerMark(player, skel.name, Fk:getCardById(deal).name)
       room:moveCardTo(deal, Card.PlayerHand, player, fk.ReasonJustMove, skel.name, nil, true, player)
       if not player.dead and player:canUse(Fk:getCardById(deal)) and table.contains(player:getCardIds("h"), deal) then
@@ -59,7 +59,7 @@ skel:addEffect(fk.CardUsing, {
   anim_type = "drawcard",
   can_trigger = function(self, event, target, player, data)
     return data.card.is_damage_card and player:hasSkill(skel.name) and player:getEquipment(Card.SubtypeArmor)
-      and player:usedEffectTimes(self.name, Player.HistoryTurn) == 0 and (target == player or table.contains(data.tos, player))
+      and player:usedEffectTimes(self.name, Player.HistoryTurn) == 0 and table.contains(data.tos, player)
   end,
   on_cost = Util.TrueFunc,
   on_use = function(self, event, target, player, data)
@@ -67,10 +67,25 @@ skel:addEffect(fk.CardUsing, {
   end,
 })
 
-skel:addEffect(fk.Damaged, {
+skel:addEffect(fk.DamageCaused, {
   anim_type = "masochism",
   can_trigger = function(self, event, target, player, data)
     return player:hasSkill(skel.name) and target == player and not player:getEquipment(Card.SubtypeArmor)
+    and player:usedEffectTimes(self.name, Player.HistoryTurn) == 0
+    and #player.room.logic:getActualDamageEvents(1, function(e) return e.data.from == player end, Player.HistoryTurn) == 0
+  end,
+  on_cost = Util.TrueFunc,
+  on_use = function(self, event, target, player, data)
+    player:drawCards(1, skel.name)
+  end,
+})
+
+skel:addEffect(fk.DamageInflicted, {
+  anim_type = "masochism",
+  can_trigger = function(self, event, target, player, data)
+    return player:hasSkill(skel.name) and target == player and not player:getEquipment(Card.SubtypeArmor)
+    and player:usedEffectTimes(self.name, Player.HistoryTurn) == 0
+    and #player.room.logic:getActualDamageEvents(1, function(e) return e.data.to == player end, Player.HistoryTurn) == 0
   end,
   on_cost = Util.TrueFunc,
   on_use = function(self, event, target, player, data)
