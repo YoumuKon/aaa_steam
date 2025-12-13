@@ -192,7 +192,7 @@ Fk:loadTranslationTable{
   ["#steam__neeko"] = "万花通灵",
   ["illustrator:steam__neeko"] = "",
   ["designer:steam__neeko"] = "cyc",
-  ["~steam__neeko"] = "终于……一片寂静……",
+  ["~steam__neeko"] = " ",
 }
 
 
