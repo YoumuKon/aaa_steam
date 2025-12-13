@@ -167,7 +167,7 @@ Fk:loadTranslationTable{
 General:new(extension, "steam__Degenbrecher", "west", 4, 4, General.Female):addSkills { "steam__xuanqi", "steam__xiaomie", }
 Fk:loadTranslationTable{
   ["steam__Degenbrecher"] = "锏",
-  ["#steam__Degenbrecher"] = "传奇四罐王",
+  ["#steam__Degenbrecher"] = "传奇三罐王",
   ["illustrator:steam__Degenbrecher"] = "竜崎いち",
   ["designer:steam__Degenbrecher"] = "cyc",
   ["cv:steam__Degenbrecher"] = "吴迪",

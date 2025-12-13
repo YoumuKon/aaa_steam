@@ -186,7 +186,14 @@ Fk:loadTranslationTable{
   -- ["~steam__volibear"] = "",
 }
 
-
+General:new(extension, "steam__neeko", "west", 3, 3, General.Female):addSkills{"steam__huanmei", "steam__zhanfang",}
+Fk:loadTranslationTable{
+  ["steam__neeko"] = "妮蔻",
+  ["#steam__neeko"] = "万花通灵",
+  ["illustrator:steam__neeko"] = "",
+  ["designer:steam__neeko"] = "cyc",
+  ["~steam__neeko"] = "终于……一片寂静……",
+}
 
 
 local godhanxin = General:new(extension, "steam__godhanxin", "god", 4, 13)

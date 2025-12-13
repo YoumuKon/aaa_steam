@@ -148,6 +148,17 @@ Fk:loadTranslationTable{
   "<b>宝物技能</b>：出牌阶段各限一次，你可以弃置一张基本/非基本牌，然后摸一张属性/可食用牌。此牌离开你的装备区后销毁。",
 }
 
+local randomcard = fk.CreateCard{
+  name = "&steam_randomcard",
+  type = Card.TypeBasic,
+  skill = "steam_randomcard_skill",
+}
+extension:addCardSpec("steam_randomcard", Card.Diamond, 13)
+Fk:loadTranslationTable{
+  ["steam_randomcard"] = "随机",
+  [":steam_randomcard"] = "锦囊牌<br/><b>效果</b>：初始无法使用。当你使用一张牌后，本牌随机变化为一张基本或普通锦囊牌。(保留此效果)",
+}
+
 local befriendAttacking = fk.CreateCard{
   name = "&steam__befriend_attacking", -- 衍生避免被检索
   skill = "steam__befriend_attacking_skill",
@@ -167,6 +178,7 @@ extension:loadCardSkels {
   shuheng,
   baizao,
   zuitan,
+  randomcard,
 
   befriendAttacking,
 }
