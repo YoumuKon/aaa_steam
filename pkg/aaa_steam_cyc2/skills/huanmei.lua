@@ -4,8 +4,9 @@ local skel = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["steam__huanmei"] = "幻魅",
-  [":steam__huanmei"] = "每两个回合，你获得一张【随机应变】或【随机】。其他角色的回合开始时，你可以交给其一张牌。",
+  [":steam__huanmei"] = "游戏开始时/每三个回合，你随机/自选获得一张【随机应变】或【随机】。其他角色的回合开始时，你可以交给其一张牌。",
 
+  ["#steam__huanmei-takeinvoke"] = "幻魅：点确定获得一张【随机应变】，否则获得一张【随机】。",
   ["#steam__huanmei-invoke"] = "幻魅：是否交给 %dest 一张牌？",
   ["@@steam__huanmei"] = "幻魅",
 
@@ -13,21 +14,41 @@ Fk:loadTranslationTable{
   ["$steam__huanmei2"] = " ",
 }
 
+skel:addEffect(fk.GameStart, {
+  anim_type = "control",
+  can_trigger = function(self, event, target, player, data)
+    return player:hasSkill(skel.name)
+  end,
+  on_cost = Util.TrueFunc,
+  on_use = function (self, event, target, player, data)
+    local room = player.room
+    local get = {}
+    local name = table.random({"adaptation", "steam_randomcard"}, 1)[1]
+    if name == "adaptation" then
+      table.insert(get, room:printCard("adaptation", Card.Spade, 2).id)
+    elseif name == "steam_randomcard" then
+      table.insert(get, room:printCard("steam_randomcard", Card.Diamond, 13).id)
+    end
+    room:setCardMark(Fk:getCardById(get[1]), "@@steam__huanmei", 1)
+    room:obtainCard(player, get, true, fk.ReasonJustMove, player, skel.name, MarkEnum.DestructIntoDiscard)
+  end,
+})
+
 skel:addEffect(fk.TurnStart, {
   anim_type = "control",
   can_trigger = function(self, event, target, player, data)
     if player:hasSkill(skel.name) then
       player.room:addPlayerMark(player, skel.name, 1)
-      if (target ~= player and not target.dead) or player:getMark(skel.name) == 2 then
+      if (target ~= player and not target.dead) or player:getMark(skel.name) == 3 then
         return true
       end
     end
   end,
   on_cost = function (self, event, target, player, data)
-    if player:getMark(skel.name) == 2 then
+    if player:getMark(skel.name) == 3 then
       event:setCostData(self, {tos = player})
       return true
-    elseif (target ~= player and not target.dead) and player:getMark(skel.name) ~= 2 then
+    elseif (target ~= player and not target.dead) and player:getMark(skel.name) ~= 3 then
       local cards = player.room:askToCards(player, {
         min_num = 1,
         max_num = 1,
@@ -48,12 +69,12 @@ skel:addEffect(fk.TurnStart, {
     if cards ~= nil then
       room:obtainCard(target, cards, false, fk.ReasonGive, player, skel.name)
     else
-      room:removePlayerMark(player, skel.name, 2)
+      room:removePlayerMark(player, skel.name, 3)
       local get = {}
-      local name = table.random({"adaptation", "steam_randomcard"}, 1)[1]
-      if name == "adaptation" then
+      local name = room:askToSkillInvoke(player, {skill_name = skel.name, prompt = "#steam__huanmei-takeinvoke",})
+      if name then
         table.insert(get, room:printCard("adaptation", Card.Spade, 2).id)
-      elseif name == "steam_randomcard" then
+      else
         table.insert(get, room:printCard("steam_randomcard", Card.Diamond, 13).id)
       end
       room:setCardMark(Fk:getCardById(get[1]), "@@steam__huanmei", 1)
