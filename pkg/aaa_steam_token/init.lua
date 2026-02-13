@@ -148,6 +148,24 @@ Fk:loadTranslationTable{
   "<b>宝物技能</b>：出牌阶段各限一次，你可以弃置一张基本/非基本牌，然后摸一张属性/可食用牌。此牌离开你的装备区后销毁。",
 }
 
+local qihe = fk.CreateCard{
+  name = "&steam_qihe_equip",
+  type = Card.TypeEquip,
+  sub_type = Card.SubtypeTreasure,
+  equip_skill = "steam_qihe_equip_skill&",
+  on_uninstall = function(self, room, player)
+    Treasure.onUninstall(self, room, player)
+    player:setSkillUseHistory("steam_qihe_equip_skill&", 0, Player.HistoryPhase)
+  end,
+}
+extension:addCardSpec("steam_qihe_equip", Card.Club, 2)
+Fk:loadTranslationTable{
+  ["steam_qihe_equip"] = "云与漆",
+  [":steam_qihe_equip"] = "装备牌·宝物<br/>"..
+  "<b>宝物技能</b>：转换技，每回合限一次，阳：你可以将最靠近牌堆顶的非装备牌置入一个空置装备栏；阴：望可以移动你场上的一张牌；以视为使用一张【杀/闪】。此牌离开装备区后销毁。",
+}
+
+
 local randomcard = fk.CreateCard{
   name = "&steam_randomcard",
   type = Card.TypeBasic,
@@ -178,6 +196,7 @@ extension:loadCardSkels {
   shuheng,
   baizao,
   zuitan,
+  qihe,
   randomcard,
 
   befriendAttacking,

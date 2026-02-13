@@ -153,6 +153,69 @@ Fk:loadTranslationTable{
   ["~steam__yu"] = "禁止明火吗，唔...",
 }
 
+General:new(extension, "steam__wang", "han", 3, 3):addSkills{ "steam__qihe", "steam__shijie" }
+Fk:loadTranslationTable{
+  ["steam__wang"] = "望",
+  ["#steam__wang"] = "丑谋",
+  ["illustrator:steam__wang"] = "KuroBlood",
+  ["cv:steam__wang"] = "弦雾妖弦",
+  ["designer:steam__wang"] = "cyc",
+
+  ["~steam__wang"] = "尽出点馊主意。",
+}
+
+local weapon__steam__qihe = fk.CreateCard{
+  name = "&weapon__steam__qihe",
+  type = Card.TypeEquip,
+  sub_type = Card.SubtypeWeapon,
+}
+extension:loadCardSkels{weapon__steam__qihe}
+extension:addCardSpec("weapon__steam__qihe")
+
+local armor__steam__qihe = fk.CreateCard{
+  name = "&armor__steam__qihe",
+  type = Card.TypeEquip,
+  sub_type = Card.SubtypeArmor,
+}
+extension:loadCardSkels{armor__steam__qihe}
+extension:addCardSpec("armor__steam__qihe")
+
+local offensive_horse__steam__qihe = fk.CreateCard{
+  name = "&offensive_horse__steam__qihe",
+  type = Card.TypeEquip,
+  sub_type = Card.SubtypeOffensiveRide,
+}
+extension:loadCardSkels{offensive_horse__steam__qihe}
+extension:addCardSpec("offensive_horse__steam__qihe")
+
+local defensive_horse__steam__qihe = fk.CreateCard{
+  name = "&defensive_horse__steam__qihe",
+  type = Card.TypeEquip,
+  sub_type = Card.SubtypeDefensiveRide,
+}
+extension:loadCardSkels{defensive_horse__steam__qihe}
+extension:addCardSpec("defensive_horse__steam__qihe")
+
+local treasure__steam__qihe = fk.CreateCard{
+  name = "&treasure__steam__qihe",
+  type = Card.TypeEquip,
+  sub_type = Card.SubtypeTreasure,
+}
+extension:loadCardSkels{treasure__steam__qihe}
+extension:addCardSpec("treasure__steam__qihe")
+Fk:loadTranslationTable{
+  ["weapon__steam__qihe"] = "云与漆X",
+  ["armor__steam__qihe"] = "云与漆X",
+  ["offensive_horse__steam__qihe"] = "云与漆X",
+  ["defensive_horse__steam__qihe"] = "云与漆X",
+  ["treasure__steam__qihe"] = "云与漆X",
+  [":weapon__steam__qihe"] = "这是一张“云与漆”衍生的武器。",
+  [":armor__steam__qihe"] = "这是一张“云与漆”衍生的防具。",
+  [":offensive_horse__steam__qihe"] = "这是一张“云与漆”衍生的进攻坐骑。",
+  [":defensive_horse__steam__qihe"] = "这是一张“云与漆”衍生的防御坐骑。",
+  [":treasure__steam__qihe"] = "这是一张“云与漆”衍生的宝物。",
+}
+
 General:new(extension, "steam__mlynar", "west", 6, 6):addSkills{ "steam__mochen", "steam__fengmang"}
 Fk:loadTranslationTable{
   ["steam__mlynar"] = "玛恩纳",
