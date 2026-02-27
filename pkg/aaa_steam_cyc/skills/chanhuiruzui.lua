@@ -102,10 +102,10 @@ skel:addEffect(fk.TurnEnd, {
       pattern = ".|2~9|spade,heart",
       skipDrop = true,
     }
-    room:judge(judge)
+    room:judge(judge) ---@cast judge JudgeData
     local cid = judge.card and judge.card:getEffectiveId()
     if cid == nil then return end
-    if judge.card:matchPattern(judge.pattern) and not player.dead then
+    if judge:matchPattern() and not player.dead then
       if room:getCardArea(cid) == Card.Processing then
         room:obtainCard(player, cid, true, fk.ReasonPrey, player, skel.name)
         if player.dead then return end
